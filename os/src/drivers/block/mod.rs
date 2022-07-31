@@ -1,16 +1,25 @@
 mod sdcard;
 mod virtio_blk;
+mod ramdisk_blk;
 
 pub use sdcard::SDCardWrapper;
 pub use virtio_blk::VirtIOBlock;
 
 use crate::board::BlockDeviceImpl;
+use crate::board::RamBlockDeviceImpl;
 use alloc::sync::Arc;
 use easy_fs::BlockDevice;
 use lazy_static::*;
 
+
+pub use ramdisk_blk::RamDiskBlock;
+
+// lazy_static! {
+//     pub static ref BLOCK_DEVICE: Arc<dyn BlockDevice> = Arc::new(BlockDeviceImpl::new());
+// }
+
 lazy_static! {
-    pub static ref BLOCK_DEVICE: Arc<dyn BlockDevice> = Arc::new(BlockDeviceImpl::new());
+    pub static ref BLOCK_DEVICE: Arc<dyn BlockDevice> = Arc::new(RamBlockDeviceImpl::new());
 }
 
 #[allow(unused)]

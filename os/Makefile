@@ -122,3 +122,33 @@ gdbclient:
 	@riscv64-unknown-elf-gdb -ex 'file $(KERNEL_ELF)' -ex 'set arch riscv:rv64' -ex 'target remote localhost:1234'
 
 .PHONY: build env kernel clean disasm disasm-vim run-inner switch-check fs-img gdbserver gdbclient
+
+
+
+foo: build
+	qemu-system-riscv64 \
+		-machine virt \
+		-nographic \
+		-bios default \
+		-kernel $(KERNEL_BIN) \
+		-initrd $(FS_IMG) \
+		-m 128m
+	
+foo1: build
+	qemu-system-riscv64 \
+		-machine virt \
+		-nographic \
+		-bios default \
+		-kernel $(KERNEL_BIN) \
+		-initrd $(FS_IMG) \
+		-m 128m \
+		-S -s
+foo2:
+	qemu-system-riscv64 \
+		-machine virt \
+		-nographic \
+		-bios default \
+		-kernel $(KERNEL_BIN) \
+		-initrd $(FS_IMG) \
+		-m 128m \
+		-s -S

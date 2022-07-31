@@ -99,7 +99,7 @@ pub fn init_frame_allocator() {
     }
     FRAME_ALLOCATOR.exclusive_access().init(
         PhysAddr::from(ekernel as usize).ceil(),
-        PhysAddr::from(MEMORY_END).floor(),
+        PhysAddr::from(0x841ff000).floor(),
     );
 }
 /// allocate a frame

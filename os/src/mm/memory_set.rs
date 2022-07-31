@@ -144,11 +144,21 @@ impl MemorySet {
             ),
             None,
         );
-        println!("mapping physical memory");
+        println!("mapping physical memory start:{:x?} end:{:x?}", ekernel as usize, 0x841ff000 as usize);
         memory_set.push(
             MapArea::new(
                 (ekernel as usize).into(),
-                MEMORY_END.into(),
+                0x83fff000.into(),
+                MapType::Identical,
+                MapPermission::R | MapPermission::W,
+            ),
+            None,
+        );
+        println!("mapping ramdisk start:{:x?} end:{:x?}", 0x84200000 as usize, 0x88000000 as usize);
+        memory_set.push(
+            MapArea::new(
+                (0x84200000 as usize).into(),
+                0x88000000.into(),
                 MapType::Identical,
                 MapPermission::R | MapPermission::W,
             ),

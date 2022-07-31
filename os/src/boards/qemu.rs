@@ -8,6 +8,7 @@ pub const MMIO: &[(usize, usize)] = &[
 
 pub type BlockDeviceImpl = crate::drivers::block::VirtIOBlock;
 
+pub type RamBlockDeviceImpl = crate::drivers::block::RamDiskBlock;
 //ref:: https://github.com/andre-richter/qemu-exit
 use core::arch::asm;
 
