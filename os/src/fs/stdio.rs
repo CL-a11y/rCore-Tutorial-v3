@@ -1,4 +1,6 @@
 //!Stdin & Stdout
+use k210_pac::gpio::interrupt_polarity;
+
 use super::File;
 use crate::mm::UserBuffer;
 use crate::sbi::console_getchar;
@@ -18,10 +20,10 @@ impl File for Stdin {
     fn read(&self, mut user_buf: UserBuffer) -> usize {
         assert_eq!(user_buf.len(), 1);
         // busy loop
-        let mut c: usize;
+        let mut c: i64;
         loop {
             c = console_getchar();
-            if c == 0 {
+            if c == 0 || c == -1 {
                 suspend_current_and_run_next();
                 continue;
             } else {

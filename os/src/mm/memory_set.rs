@@ -148,19 +148,19 @@ impl MemorySet {
         memory_set.push(
             MapArea::new(
                 (ekernel as usize).into(),
-                0x83fff000.into(),
+                0x841f0000.into(),
                 MapType::Identical,
                 MapPermission::R | MapPermission::W,
             ),
             None,
         );
-        println!("mapping ramdisk start:{:x?} end:{:x?}", 0x84200000 as usize, 0x88000000 as usize);
+        println!("mapping ramdisk start:{:x?} end:{:x?}", 0x84200000 as usize, 0x86f00000 as usize);
         memory_set.push(
             MapArea::new(
                 (0x84200000 as usize).into(),
-                0x88000000.into(),
+                (0x85200000 as usize).into(),
                 MapType::Identical,
-                MapPermission::R | MapPermission::W,
+                MapPermission::R | MapPermission::W ,
             ),
             None,
         );
